@@ -38,7 +38,7 @@ def go(args):
     # Save to output files
     for df, k in zip([trainval, test], ['trainval', 'test']):
         logger.info(f"Uploading {k}_data.csv dataset")
-        with open(os.path.join(tempfile.gettempdir(), os.urandom(24).hex())) as fp:
+        with open(os.path.join(tempfile.gettempdir(), os.urandom(24).hex()), "w+") as fp:
 
             df.to_csv(fp.name, index=False)
 
