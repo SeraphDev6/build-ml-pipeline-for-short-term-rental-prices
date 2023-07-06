@@ -4,6 +4,7 @@ This script splits the provided dataframe in test and remainder
 """
 import argparse
 import logging
+import os
 import pandas as pd
 import wandb
 import tempfile
@@ -37,7 +38,7 @@ def go(args):
     # Save to output files
     for df, k in zip([trainval, test], ['trainval', 'test']):
         logger.info(f"Uploading {k}_data.csv dataset")
-        with tempfile.NamedTemporaryFile("w") as fp:
+        with open(os.path.join(tempfile.gettempdir(), os.urandom(24).hex())) as fp:
 
             df.to_csv(fp.name, index=False)
 
