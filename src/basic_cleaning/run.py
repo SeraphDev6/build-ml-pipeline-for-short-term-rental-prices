@@ -27,7 +27,8 @@ def go(args):
 
     new_df = df[price_filter & min_nights_filter].copy()
     new_df["last_review"] = pd.to_datetime(new_df["last_review"])
-
+    idx = new_df['longitude'].between(-74.25, -73.50) & new_df['latitude'].between(40.5, 41.2)
+    new_df = new_df[idx].copy()
     new_df.to_csv("clean_sample.csv", index = False)
 
     art = wandb.Artifact(
